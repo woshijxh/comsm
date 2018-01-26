@@ -10,3 +10,7 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+function user_password($password, $password_code='qscvhUkNgRD'){
+    return md5(md5($password).md5($password_code));
+}
