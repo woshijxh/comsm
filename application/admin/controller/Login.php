@@ -42,7 +42,7 @@ class Login extends Controller
                     return $this->error('提交失败：' . $validate->getError());
                 }
                 #判断用户名是否存在
-                $username = Db::name('comsm_admin')->where('username',$post['name'])->find();
+                $username = Db::name('user')->where('username',$post['username'])->find();
                 if(empty($username)){
                     return $this->error('用户不存在!');
                 }else{
@@ -50,9 +50,9 @@ class Login extends Controller
                     if($post['password'] !== $username['password']){
                         return $this->error('密码错误!');
                     }else{
-                        Session::set('name',$username['admin_id'],7200);
+                        Session::set('name',$username['admin_id']);
                         #记录登录ip和登录时间
-                        Db::name('comsm_admin')->where('admin_id',$username['admin_id'])->update(['login_ip' => $this->request->ip(), 'login_time' => time()]);
+                        Db::name('user')->where('admin_id',$username['admin_id'])->update(['login_ip' => $this->request->ip(), 'login_time' => time()]);
                         return $this->success('登录成功,正在跳转...','admin/index/index');
                     }
                 }

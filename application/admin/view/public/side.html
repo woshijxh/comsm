@@ -1,0 +1,26 @@
+<div class="layui-side">
+    <div class="layui-side-scroll">
+        <ul class="layui-nav layui-nav-tree" lay-filter="leftnav">
+            <li class="layui-nav-item layui-this">
+                <a href="javascript:;"><i class="fa fa-home"></i>首页</a>
+            </li>
+            {volist name="menus" id="data"}
+            <li class="layui-nav-item">
+                <a href="javascript:;"><i class="fa {$data.icon}"></i>{$data.title}</a>
+
+                <dl class="layui-nav-child">
+                    {notempty name="$data.list"}
+                    {volist name="$data.list" id="vo"}
+                    <dd><a href="javascript:;" data-url="datalist.html" data-id="1">{$vo.title}</a></dd>
+                    {/volist}
+                    {/notempty}
+                </dl>
+            </li>
+            {/volist}
+        </ul>
+    </div>
+</div>
+<!--收起导航-->
+<div class="layui-side-hide layui-bg-cyan">
+    <i class="fa fa-long-arrow-left fa-fw"></i>收起导航
+</div>
